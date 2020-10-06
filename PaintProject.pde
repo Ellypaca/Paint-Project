@@ -40,6 +40,8 @@ float sliderY;
 float sliderR;
 float Thickness;
 
+float PictureW, PictureH;
+
 //to check if the colors are "on" for the outline
 boolean OnOff;
 
@@ -204,11 +206,11 @@ void draw() {
 
   Thickness = map(sliderY, 365, 565, 5, 60);
   sliderR = map(sliderY, 365, 565, 5, 60);
+  PictureW = map(sliderY, 365, 565, 10, 130);
+  PictureH = map(sliderY, 365, 565, 13.23, 172);
   strokeWeight(2);
-  stroke(Black);
-  fill(100);
+  SliderTactile(75, 365, 50, 200);
   triangle(100, 365, 75, 565, 125, 565);
-  strokeWeight(2);
   fill(selectedColor);
   circle(100, sliderY, sliderR);
 
@@ -309,6 +311,14 @@ void tactile(int x, int y, int r) {
   }
 }
 
+void SliderTactile(int x, int y, int w, int h) {
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+    fill(#B1C6AA);
+  } else {
+    fill(100);
+  }
+}
+
 void StampTactile(int x, int y, int w, int h) {
   if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
     fill(#33DDAA);
@@ -336,16 +346,16 @@ void mouseDragged() {
     strokeWeight(Thickness);
     stroke (selectedColor);
     line(pmouseX, pmouseY, mouseX, mouseY);
-  } else if (AyaOn == true && PenOn == false) {
-    image(Aya, mouseX, mouseY, 130, 172);
-  } else if (ChisatoOn == true && PenOn == false) {
-    image(Chisato, mouseX, mouseY, 110, 158);
-  } else if (HinaOn == true && PenOn == false) {
-    image(Hina, mouseX, mouseY, 223/2, 331/2);
-  } else if (MayaOn == true && PenOn == false) {
-    image(Maya, mouseX, mouseY, 160, 186);
-  } else if (EveOn == true && PenOn == false) {
-    image(Eve, mouseX, mouseY, 101, 168);
+  } else if (mouseX > 200 && AyaOn == true && PenOn == false) {
+    image(Aya, mouseX, mouseY, PictureW, PictureH); //130, 172
+  } else if (mouseX > 200 && ChisatoOn == true && PenOn == false) {
+    image(Chisato, mouseX, mouseY, PictureW, PictureH); //110, 158
+  } else if (mouseX > 200 && HinaOn == true && PenOn == false) {
+    image(Hina, mouseX, mouseY, PictureW, PictureH); //223/2, 331/2
+  } else if (mouseX > 200 && MayaOn == true && PenOn == false) {
+    image(Maya, mouseX, mouseY, PictureW, PictureH); //160, 186
+  } else if (mouseX > 200 && EveOn == true && PenOn == false) {
+    image(Eve, mouseX, mouseY, PictureW, PictureH); //101, 168
   }
   //for the slider
   controlSlider();
